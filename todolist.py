@@ -1,22 +1,15 @@
 import json
 import os
 
-# File to store tasks
 TASKS_FILE = "todo_tasks.json"
-
-# Load tasks from file
 def load_tasks():
     if not os.path.exists(TASKS_FILE):
         return []
     with open(TASKS_FILE, 'r') as file:
         return json.load(file)
-
-# Save tasks to file
 def save_tasks(tasks):
     with open(TASKS_FILE, 'w') as file:
         json.dump(tasks, file, indent=4)
-
-# Display tasks
 def display_tasks(tasks):
     if not tasks:
         print("\n📭 No tasks available.\n")
@@ -26,8 +19,6 @@ def display_tasks(tasks):
             status = "✅" if task['completed'] else "❌"
             print(f"{idx}. [{status}] {task['description']}")
         print()
-
-# Add a task
 def add_task(tasks):
     description = input("Enter task description: ").strip()
     if description:
@@ -36,8 +27,6 @@ def add_task(tasks):
         print("✅ Task added successfully!")
     else:
         print("⚠️ Task description cannot be empty!")
-
-# Mark task as complete
 def complete_task(tasks):
     display_tasks(tasks)
     try:
@@ -64,8 +53,6 @@ def delete_task(tasks):
             print("❌ Invalid task number!")
     except ValueError:
         print("❌ Please enter a valid number!")
-
-# Update a task
 def update_task(tasks):
     display_tasks(tasks)
     try:
@@ -82,11 +69,8 @@ def update_task(tasks):
             print("❌ Invalid task number!")
     except ValueError:
         print("❌ Please enter a valid number!")
-
-# Menu loop
 def main():
     tasks = load_tasks()
-
     while True:
         print("\n🔧 TO-DO LIST MENU")
         print("1. View Tasks")
